@@ -1,0 +1,7 @@
+picloud_client:
+    build: .
+    volumes:
+         - .:/src
+    environment:
+        PICLOUD_API_KEY:
+        PICLOUD_URL:
