@@ -25,7 +25,6 @@ class PiCloud(object):
         self._subscriptions[event].append(callback)
 
     def process_subscriptions(self):
-        while True:
-            message = self._connection.receive()
-            for cb in self._subscriptions[message['event']]:
-                cb(data=message['data'])
+        message = self._connection.receive()
+        for cb in self._subscriptions[message['event']]:
+            cb(data=message['data'])
