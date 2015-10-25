@@ -18,7 +18,7 @@ Using this module requires that you have exported both of the environment variab
 
 ### Publish data for an event
 
-```
+```python
 from picloud_client import PiCloud
 
 
@@ -30,7 +30,7 @@ picloud.publish(event='temperature', data='76.5 F')
 
 ### Subscribe to data from an event
 
-```
+```python
 from picloud_client import PiCloud
 
 
