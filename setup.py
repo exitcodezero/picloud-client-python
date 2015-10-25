@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(
-    name='PiCloud Client',
+    name='PiCloud-Client',
     version='1.0.0',
     author='Brian Hines',
     author_email='brian@projectweekend.net',
