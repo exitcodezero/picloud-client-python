@@ -1,11 +1,12 @@
 import os
 
 
-PICLOUD_URL = os.getenv('PICLOUD_URL')
-if PICLOUD_URL is None:
-    raise ValueError("PICLOUD_URL environment variable is not exported")
+def getenv_required(key):
+    v = os.getenv(key)
+    if v is None:
+        raise ValueError("{0} environment variable is not exported".format(key))
+    return v
 
 
-PICLOUD_API_KEY = os.getenv('PICLOUD_API_KEY')
-if PICLOUD_API_KEY is None:
-    raise ValueError("PICLOUD_API_KEY environment variable is not exported")
+PICLOUD_URL = getenv_required('PICLOUD_URL')
+PICLOUD_API_KEY = getenv_required('PICLOUD_API_KEY')

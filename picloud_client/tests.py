@@ -2,12 +2,12 @@ import unittest
 from picloud_client import PiCloud
 
 
-class PiCloudPublishTestCase(unittest.TestCase):
+class PiCloudTestCase(unittest.TestCase):
 
     def setUp(self):
-        super(PiCloudPublishTestCase, self).setUp()
+        super(PiCloudTestCase, self).setUp()
 
-    def test_publish(self):
+    def test_publish_subscribe(self):
         subscriber = PiCloud()
 
         def on_event(data):
