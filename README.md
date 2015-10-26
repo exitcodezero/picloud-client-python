@@ -62,7 +62,7 @@ pip install -r requirements.txt
 ```
 
 ```
-nosetests -v --with-coverage --cover-erase --cover-package=pycards --cover-html
+nosetests -v --with-coverage --cover-erase --cover-package=picloud_client --cover-html
 ```
 
 
