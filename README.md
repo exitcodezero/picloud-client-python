@@ -22,7 +22,7 @@ Using this module requires that you have exported both of the environment variab
 from picloud_client import PiCloud
 
 
-picloud = PiCloud()
+picloud = PiCloud(client_name='My-Data-Publisher')
 
 picloud.publish(event='temperature', data='76.5 F')
 ```
@@ -34,7 +34,7 @@ picloud.publish(event='temperature', data='76.5 F')
 from picloud_client import PiCloud
 
 
-picloud = PiCloud()
+picloud = PiCloud(client_name='My-Data-Subscriber')
 
 # Subscription callbacks must have one parameter: 'data'
 def on_temperature(data):
