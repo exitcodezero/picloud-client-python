@@ -8,14 +8,14 @@ class PiCloudTestCase(unittest.TestCase):
         super(PiCloudTestCase, self).setUp()
 
     def test_publish_subscribe(self):
-        subscriber = PiCloud()
+        subscriber = PiCloud(client_name='Test')
 
         def on_event(data):
             self.assertEqual(data, 'test')
 
         subscriber.subscribe(event='whatever', callback=on_event)
 
-        publisher = PiCloud()
+        publisher = PiCloud(client_name='Test')
         publisher.publish(event='whatever', data='test')
 
         subscriber.process_subscriptions()

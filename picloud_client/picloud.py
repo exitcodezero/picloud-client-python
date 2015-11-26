@@ -4,8 +4,9 @@ from picloud_client.connection import Connection
 
 class PiCloud(object):
 
-    def __init__(self):
-        self._connection = Connection()
+    def __init__(self, client_name):
+        self.client_name = client_name
+        self._connection = Connection(client_name=self.client_name)
         self._subscriptions = defaultdict(list)
 
     def publish(self, event, data):
