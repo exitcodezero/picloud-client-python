@@ -7,31 +7,18 @@ Usage
 Using this module requires that you have exported both of the environment variables listed in the section above.
 
 
-### Publish data for an event
+### SocketClient usage
 
 ```python
-from picloud_client import PubClient
+from picloud_client import SocketClient
 
-
-client = PubClient(
-    url='http://mypicloudserver.com/publish',
+client = SocketClient(
+    url='wss://mypicloudserver.com',
     api_key='secretapikey',
     client_name='Whatever-You-Want')
 
+# Publish 'data' for an 'event'
 client.publish(event='temperature', data='76.5 F')
-```
-
-
-### Subscribe to data from an event
-
-```python
-from picloud_client import SubClient
-
-
-client = SubClient(
-    url='wss://mypicloudserver.com/subscribe',
-    api_key='secretapikey',
-    client_name='Whatever-You-Want')
 
 # Subscription callbacks must have one parameter: 'data'
 def on_temperature(data):
@@ -46,6 +33,21 @@ while True:
 ```
 
 Multiple callbacks can be subscribed to an `event`. They are executed in the order they were added from the `subscribe` method.
+
+### HttpClient usage
+
+```python
+from picloud_client import HttpClient
+
+
+client = HttpClient(
+    url='http://mypicloudserver.com',
+    api_key='secretapikey',
+    client_name='Whatever-You-Want')
+
+# Publish 'data' for an 'event'
+client.publish(event='temperature', data='76.5 F')
+```
 
 
 
