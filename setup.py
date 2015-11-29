@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='PiCloud-Client',
-    version='2.0.0',
+    version='3.0.0',
     author='Brian Hines',
     author_email='brian@projectweekend.net',
     packages=['picloud_client'],
@@ -12,5 +12,6 @@ setup(
     long_description=open('README.txt').read(),
     install_requires=[
         "websocket-client == 0.32.0",
+        "requests == 2.8.1",
     ],
 )
