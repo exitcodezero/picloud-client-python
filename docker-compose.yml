@@ -3,5 +3,6 @@ picloud_client:
     volumes:
          - .:/src
     environment:
-        PICLOUD_API_KEY:
-        PICLOUD_URL:
+        PICLOUD_API_KEY: secretapikey
+        PICLOUD_SUB_URL: ws://192.168.99.100:9000/subscribe
+        PICLOUD_PUB_URL: http://192.168.99.100:9000/publish

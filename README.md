@@ -1,15 +1,6 @@
 A Python client for [PiCloud](https://github.com/exitcodezero/picloud).
 
 
-
-Environment Variables
-====================
-
-* `PICLOUD_URL` - URL for the `picloud` server
-* `PICLOUD_API_KEY` - API key for the `picloud` server
-
-
-
 Usage
 ====================
 
@@ -19,33 +10,39 @@ Using this module requires that you have exported both of the environment variab
 ### Publish data for an event
 
 ```python
-from picloud_client import PiCloud
+from picloud_client import PubClient
 
 
-picloud = PiCloud(client_name='My-Data-Publisher')
+client = PubClient(
+    url='http://mypicloudserver.com/publish',
+    api_key='secretapikey',
+    client_name='Whatever-You-Want')
 
-picloud.publish(event='temperature', data='76.5 F')
+client.publish(event='temperature', data='76.5 F')
 ```
 
 
 ### Subscribe to data from an event
 
 ```python
-from picloud_client import PiCloud
+from picloud_client import SubClient
 
 
-picloud = PiCloud(client_name='My-Data-Subscriber')
+client = SubClient(
+    url='wss://mypicloudserver.com/subscribe',
+    api_key='secretapikey',
+    client_name='Whatever-You-Want')
 
 # Subscription callbacks must have one parameter: 'data'
 def on_temperature(data):
     # Do something way cooler here
     print(data)
 
-picloud.subscribe(event='temperature', callback=on_temperature)
+client.subscribe(event='temperature', callback=on_temperature)
 
 # Process incoming event data in a loop...forever
 while True:
-    picloud.process_subscriptions()
+    client.process_subscriptions()
 ```
 
 Multiple callbacks can be subscribed to an `event`. They are executed in the order they were added from the `subscribe` method.

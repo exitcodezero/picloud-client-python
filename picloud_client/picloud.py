@@ -1,21 +1,22 @@
 from collections import defaultdict
+import requests
 from picloud_client.connection import Connection
 
 
-class PiCloud(object):
+class PublishError(Exception):
 
-    def __init__(self, client_name):
+    pass
+
+
+class SubClient(object):
+
+    def __init__(self, url, api_key, client_name):
         self.client_name = client_name
-        self._connection = Connection(client_name=self.client_name)
+        self._connection = Connection(
+            socket_url=url,
+            api_key=api_key,
+            client_name=self.client_name)
         self._subscriptions = defaultdict(list)
-
-    def publish(self, event, data):
-        message = {
-            'action': 'publish',
-            'event': event,
-            'data': data
-        }
-        self._connection.send(message)
 
     def subscribe(self, event, callback):
         message = {
@@ -29,3 +30,24 @@ class PiCloud(object):
         message = self._connection.receive()
         for cb in self._subscriptions[message['event']]:
             cb(data=message['data'])
+
+
+class PubClient(object):
+
+    def __init__(self, url, api_key, client_name):
+        self.client_name = client_name
+        self._url = url
+        self._api_key = api_key
+
+    def publish(self, event, data):
+        headers = {
+            'X-API-Key': self._api_key,
+            'X-API-Client-Name': self.client_name
+        }
+        body = {
+            'event': event,
+            'data': data
+        }
+        response = requests.post(self._url, json=body, headers=headers)
+        if response.status_code != 201:
+            raise PublishError
