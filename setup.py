@@ -12,6 +12,6 @@ setup(
     long_description=open('README.txt').read(),
     install_requires=[
         "websocket-client == 0.32.0",
-        "requests == 2.8.1",
+        "requests == 2.20.0",
     ],
 )
